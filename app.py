@@ -97,7 +97,7 @@ def main():
     # Lê o conteúdo do primeiro PDF
     text1 = []
     with open(temp_file_path1, 'rb') as pdf_file:
-        pdf_reader = PyPDF2.PdfFileReader(pdf_file)
+        pdf_reader =  PyPDFLoader(pdf_file)
         for page_number in range(pdf_reader.numPages):
             page = pdf_reader.getPage(page_number)
             text1.append(page.extractText())
@@ -114,7 +114,7 @@ def main():
     # Lê o conteúdo do segundo PDF
     text2 = []
     with open(temp_file_path2, 'rb') as pdf_file:
-        pdf_reader = PyPDF2.PdfFileReader(pdf_file)
+        pdf_reader = PyPDFLoader(pdf_file)
         for page_number in range(pdf_reader.numPages):
             page = pdf_reader.getPage(page_number)
             text2.append(page.extractText())
