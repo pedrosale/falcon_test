@@ -31,7 +31,7 @@ def initialize_session_state():
         st.session_state['past'] = ["Olá, sou assistente do Pedro."]
 
 def conversation_chat(query, chain, history):
-    prompt = "Você é um assistente que só conversa no idioma português do Brasil (você nunca, jamais conversa em outro idioma que não seja o português do Brasil):\n\n"  # Adicionando prompt para indicar o idioma
+    prompt = "Você é um assistente que só conversa no idioma português do Brasil (você nunca, jamais conversa em outro idioma que não seja o português do Brasil). Você é um assistente que possui como objetivo ajudar o usuário a desenvolver um chatbot para o propósito dele, mitigando o risco de alucinação. Ou seja, como assistente, seu objetivo é ser exemplo do tema de não alucinar: conduzindo uma conversa que forneça respostas adequadas para mitigar o risco de alucinação. Para que outros usuários possam desenvolver chatbots confiáveis.:\n\n"  # Adicionando prompt para indicar o idioma
     query_with_prompt = prompt + query
     result = chain({"question": query_with_prompt, "chat_history": history})
     history.append((query, result["answer"]))
@@ -83,11 +83,11 @@ def main():
     # Initialize session state
     initialize_session_state()
     st.title('[Versão 3.0] 🦙💬 Llama 2 Chatbot desenvolvido por Pedro Sampaio Amorim.')
-    st.markdown('**Esta versão contém:**  \nA) Modelo llama2 com refinamento de parâmetros;  \nB) Ajuste de prompt de chamada para retorno em português-BR;  \nC) Conjunto de dados pré-carregados do CTB [Veja os dados](https://raw.githubusercontent.com/pedrosale/bot2/main/CTB3.txt);  \nD) Processamento dos dados carregados com uso da biblioteca Langchain.')
+    st.markdown('**Esta versão contém:**  \nA) Modelo llama2 com refinamento de parâmetros;  \nB) Ajuste de prompt para debate sobre Alucinação do modelo";  \nC) Conjuntos de dadoss pré-carregados referente ao tema [Veja os dados](https://github.com/pedrosale/papagaio_estocastico/blob/7d543048e5dd1db7d27920d4c91faa9f51519897/AI%20Hallucinations%20A%20Misnomer%20Worth%20Clarifying.pdf);  \nD) Processamento dos dados carregados com uso da biblioteca Langchain.')
     # Carrega o arquivo diretamente (substitua o caminho do arquivo conforme necessário)
 
     # Carrega o primeiro arquivo diretamente
-    file_path1 = "https://raw.githubusercontent.com/pedrosale/bot2/main/CTB3.txt"
+    file_path1 = "https://github.com/pedrosale/papagaio_estocastico/blob/eacd20b4e89c567fa29643a159afe40fec7d2fac/What%20are%20AI%20hallucinations_%20_%20IBM.pdf"
     with tempfile.NamedTemporaryFile(delete=False) as temp_file1:
         temp_file1.write(urllib.request.urlopen(file_path1).read())
         temp_file_path1 = temp_file1.name
@@ -98,7 +98,7 @@ def main():
     os.remove(temp_file_path1)
     
     # Carrega o segundo arquivo diretamente
-    file_path2 = "https://raw.githubusercontent.com/pedrosale/bot2/main/CTB2.txt"
+    file_path2 = "(https://github.com/pedrosale/papagaio_estocastico/blob/7d543048e5dd1db7d27920d4c91faa9f51519897/AI%20Hallucinations%20A%20Misnomer%20Worth%20Clarifying.pdf"
     with tempfile.NamedTemporaryFile(delete=False) as temp_file2:
         temp_file2.write(urllib.request.urlopen(file_path2).read())
         temp_file_path2 = temp_file2.name
