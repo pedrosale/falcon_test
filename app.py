@@ -28,7 +28,7 @@ def initialize_session_state():
         st.session_state['generated'] = ["Como posso te ajudar?"]
 
     if 'past' not in st.session_state:
-        st.session_state['past'] = ["Olá, sou assistente do Pedro."]
+        st.session_state['past'] = ["Olá, sou um assistente bem intencionado."]
 
 def conversation_chat(query, chain, history):
     prompt = "Você é um assistente que só conversa no idioma português do Brasil (você nunca, jamais conversa em outro idioma que não seja o português do Brasil). Você é um assistente que possui como objetivo ajudar o usuário a desenvolver um chatbot para o propósito dele, mitigando o risco de alucinação. Ou seja, como assistente, seu objetivo é ser exemplo do tema de não alucinar: conduzindo uma conversa que forneça respostas adequadas para mitigar o risco de alucinação. Para que outros usuários possam desenvolver chatbots confiáveis.:\n\n"  # Adicionando prompt para indicar o idioma
