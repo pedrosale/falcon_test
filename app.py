@@ -84,7 +84,7 @@ def main():
     initialize_session_state()
     st.title('Este é um modelo de papagaio estocástico para debater sobre como lidar com eles (ou pelo menos tentar - uma vez que a própria conceituação do tema permanece imprecisa...).')
     st.image("https://raw.githubusercontent.com/pedrosale/papagaio_estocastico/9b270efddaae8743aeec4f5f9cff7327a0e73dee/p_est.jpeg", caption="Papagaio Estocástico", width=225)
-    st.markdown('**Esta versão contém:**  \nUm conjuntos de dados pré-carregados referente ao tema [Veja os dados](https://raw.githubusercontent.com/pedrosale/papagaio_estocastico/main/AI-Hallucinations-A-Misnomer-Worth-Clarifying.txt).'
+    st.markdown('**Esta versão contém:**  \nUm conjunto de dados pré-carregados referente ao tema [Veja os dados](https://raw.githubusercontent.com/pedrosale/papagaio_estocastico/main/AI-Hallucinations-A-Misnomer-Worth-Clarifying.txt).')
                 
     # Carrega o arquivo diretamente (substitua o caminho do arquivo conforme necessário)
 
