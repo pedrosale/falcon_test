@@ -96,7 +96,7 @@ def main():
     # Lê o conteúdo do primeiro PDF
     text1 = []
     with open(temp_file_path1, 'rb') as pdf_file:
-        pdf_loader = PyPDFLoader(pdf_file)
+        pdf_loader = PyPDFLoader(temp_file_path1)  # Corrigido: fornecendo o caminho do arquivo
         text1.append(pdf_loader.load())
 
     os.remove(temp_file_path1)
@@ -111,7 +111,7 @@ def main():
     # Lê o conteúdo do segundo PDF
     text2 = []
     with open(temp_file_path2, 'rb') as pdf_file:
-        pdf_loader = PyPDFLoader(pdf_file)
+        pdf_loader = PyPDFLoader(temp_file_path2)  # Corrigido: fornecendo o caminho do arquivo
         text2.append(pdf_loader.load())
 
     os.remove(temp_file_path2)
