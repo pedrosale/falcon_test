@@ -14,3 +14,5 @@ replicate
 docx2txt
 requests
 googletrans==4.0.0-rc1
+from PyPDF2 import PdfReader
+import PyPDF2
