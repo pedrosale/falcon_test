@@ -16,6 +16,7 @@ from dotenv import load_dotenv
 import tempfile
 import urllib.request
 import requests
+import PyPDF2
 
 load_dotenv()
 
@@ -86,27 +87,40 @@ def main():
     st.markdown('**Esta versão contém:**  \nA) Modelo llama2 com refinamento de parâmetros;  \nB) Ajuste de prompt para debate sobre Alucinação do modelo;  \nC) Conjuntos de dadoss pré-carregados referente ao tema [Veja os dados](https://github.com/pedrosale/papagaio_estocastico/blob/7d543048e5dd1db7d27920d4c91faa9f51519897/AI%20Hallucinations%20A%20Misnomer%20Worth%20Clarifying.pdf);  \nD) Processamento dos dados carregados com uso da biblioteca Langchain.')
     # Carrega o arquivo diretamente (substitua o caminho do arquivo conforme necessário)
 
-    # Carrega o primeiro arquivo diretamente
-    file_path1 = "https://github.com/pedrosale/papagaio_estocastico/blob/eacd20b4e89c567fa29643a159afe40fec7d2fac/What%20are%20AI%20hallucinations_%20_%20IBM.pdf"
+   # Carrega o primeiro arquivo diretamente
+file_path1 = "https://github.com/pedrosale/papagaio_estocastico/raw/main/What%20are%20AI%20hallucinations_%20_%20IBM.pdf"
+with urllib.request.urlopen(file_path1) as response:
     with tempfile.NamedTemporaryFile(delete=False) as temp_file1:
-        temp_file1.write(urllib.request.urlopen(file_path1).read())
+        temp_file1.write(response.read())
         temp_file_path1 = temp_file1.name
 
-    text1 = []
-    loader1 = TextLoader(temp_file_path1)
-    text1.extend(loader1.load())
-    os.remove(temp_file_path1)
-    
-    # Carrega o segundo arquivo diretamente
-    file_path2 = "(https://github.com/pedrosale/papagaio_estocastico/blob/7d543048e5dd1db7d27920d4c91faa9f51519897/AI%20Hallucinations%20A%20Misnomer%20Worth%20Clarifying.pdf"
+# Lê o conteúdo do primeiro PDF
+text1 = []
+with open(temp_file_path1, 'rb') as pdf_file:
+    pdf_reader = PyPDF2.PdfFileReader(pdf_file)
+    for page_number in range(pdf_reader.numPages):
+        page = pdf_reader.getPage(page_number)
+        text1.append(page.extractText())
+
+os.remove(temp_file_path1)
+
+# Carrega o segundo arquivo diretamente
+file_path2 = "https://github.com/pedrosale/papagaio_estocastico/raw/main/AI%20Hallucinations%20A%20Misnomer%20Worth%20Clarifying.pdf"
+with urllib.request.urlopen(file_path2) as response:
     with tempfile.NamedTemporaryFile(delete=False) as temp_file2:
-        temp_file2.write(urllib.request.urlopen(file_path2).read())
+        temp_file2.write(response.read())
         temp_file_path2 = temp_file2.name
 
-    text2 = []
-    loader2 = TextLoader(temp_file_path2)
-    text2.extend(loader2.load())
-    os.remove(temp_file_path2)
+# Lê o conteúdo do segundo PDF
+text2 = []
+with open(temp_file_path2, 'rb') as pdf_file:
+    pdf_reader = PyPDF2.PdfFileReader(pdf_file)
+    for page_number in range(pdf_reader.numPages):
+        page = pdf_reader.getPage(page_number)
+        text2.append(page.extractText())
+
+os.remove(temp_file_path2)
+
     
     # Combina os textos carregados dos dois arquivos
     text = text1 + text2
