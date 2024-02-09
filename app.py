@@ -83,7 +83,7 @@ def main():
     # Initialize session state
     initialize_session_state()
     st.image("https://raw.githubusercontent.com/pedrosale/papagaio_estocastico/9b270efddaae8743aeec4f5f9cff7327a0e73dee/p_est.jpeg", caption="Papagaio Estocástico", width=150)
-    st.title('🦙💬 Llama 2 Chatbot desenvolvido por Pedro Sampaio Amorim para debater sobre papagaios estocásticos.')
+    st.title('Llama 2 Chatbot desenvolvido por Pedro Sampaio Amorim para debater sobre papagaios estocásticos.')
     st.markdown('**Esta versão contém:**  \nA) Modelo llama2 com refinamento de parâmetros;  \nB) Ajuste de prompt para debate sobre Alucinação do modelo;  \nC) Conjuntos de dados pré-carregados referente ao tema [Veja os dados](https://raw.githubusercontent.com/pedrosale/papagaio_estocastico/main/AI-Hallucinations-A-Misnomer-Worth-Clarifying.txt);  \nD) Processamento dos dados carregados com uso da biblioteca Langchain.')
     # Carrega o arquivo diretamente (substitua o caminho do arquivo conforme necessário)
 
