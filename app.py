@@ -82,7 +82,7 @@ def main():
     load_dotenv()
     # Initialize session state
     initialize_session_state()
-    st.title('[Versão 3.0] 🦙💬 Llama 2 Chatbot desenvolvido por Pedro Sampaio Amorim.')
+    st.title('🦙💬 Llama 2 Chatbot desenvolvido por Pedro Sampaio Amorim para debater sobre papagaios estocásticos.')
     st.markdown('**Esta versão contém:**  \nA) Modelo llama2 com refinamento de parâmetros;  \nB) Ajuste de prompt para debate sobre Alucinação do modelo";  \nC) Conjuntos de dadoss pré-carregados referente ao tema [Veja os dados](https://github.com/pedrosale/papagaio_estocastico/blob/7d543048e5dd1db7d27920d4c91faa9f51519897/AI%20Hallucinations%20A%20Misnomer%20Worth%20Clarifying.pdf);  \nD) Processamento dos dados carregados com uso da biblioteca Langchain.')
     # Carrega o arquivo diretamente (substitua o caminho do arquivo conforme necessário)
 
