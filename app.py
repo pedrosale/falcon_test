@@ -84,12 +84,12 @@ def main():
     initialize_session_state()
     st.image("https://raw.githubusercontent.com/pedrosale/papagaio_estocastico/9b270efddaae8743aeec4f5f9cff7327a0e73dee/p_est.jpeg", caption="Imagem de exemplo", use_column_width=True)
     st.title('🦙💬 Llama 2 Chatbot desenvolvido por Pedro Sampaio Amorim para debater sobre papagaios estocásticos.')
-    st.markdown('**Esta versão contém:**  \nA) Modelo llama2 com refinamento de parâmetros;  \nB) Ajuste de prompt para debate sobre Alucinação do modelo;  \nC) Conjuntos de dados pré-carregados referente ao tema [Veja os dados](https://github.com/pedrosale/papagaio_estocastico/blob/7d543048e5dd1db7d27920d4c91faa9f51519897/AI%20Hallucinations%20A%20Misnomer%20Worth%20Clarifying.pdf);  \nD) Processamento dos dados carregados com uso da biblioteca Langchain.')
+    st.markdown('**Esta versão contém:**  \nA) Modelo llama2 com refinamento de parâmetros;  \nB) Ajuste de prompt para debate sobre Alucinação do modelo;  \nC) Conjuntos de dados pré-carregados referente ao tema [Veja os dados](https://raw.githubusercontent.com/pedrosale/papagaio_estocastico/main/AI-Hallucinations-A-Misnomer-Worth-Clarifying.txt);  \nD) Processamento dos dados carregados com uso da biblioteca Langchain.')
     # Carrega o arquivo diretamente (substitua o caminho do arquivo conforme necessário)
 
 
     # Carrega o primeiro arquivo diretamente
-    file_path1 = "https://raw.githubusercontent.com/pedrosale/bot2/main/CTB3.txt"
+    file_path1 = https://raw.githubusercontent.com/pedrosale/papagaio_estocastico/main/AI-Hallucinations-A-Misnomer-Worth-Clarifying.txt"
     with tempfile.NamedTemporaryFile(delete=False) as temp_file1:
         temp_file1.write(urllib.request.urlopen(file_path1).read())
         temp_file_path1 = temp_file1.name
@@ -100,7 +100,7 @@ def main():
     os.remove(temp_file_path1)
     
     # Carrega o segundo arquivo diretamente
-    file_path2 = "https://raw.githubusercontent.com/pedrosale/bot2/main/CTB2.txt"
+    file_path2 = "https://raw.githubusercontent.com/pedrosale/papagaio_estocastico/main/What%20are%20AI%20hallucinations_%20_%20IBM.txt"
     with tempfile.NamedTemporaryFile(delete=False) as temp_file2:
         temp_file2.write(urllib.request.urlopen(file_path2).read())
         temp_file_path2 = temp_file2.name
