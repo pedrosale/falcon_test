@@ -16,7 +16,6 @@ from dotenv import load_dotenv
 import tempfile
 import urllib.request
 import requests
-import PyPDF2
 
 load_dotenv()
 
