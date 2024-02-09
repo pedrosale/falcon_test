@@ -82,7 +82,7 @@ def main():
     load_dotenv()
     # Initialize session state
     initialize_session_state()
-    st.title('Este é um papagaio estocástico desenvolvido por Pedro Sampaio Amorim para debater sobre como lidar com eles (ou pelo menos tentar). A própria conceituação do tema permanece imprecisa...')
+    st.title('Este é um papagaio estocástico desenvolvido por Pedro Sampaio Amorim para debater sobre como lidar com papagaios estocásticos ou pelo menos tentar, uma vez que a própria definição a repespeito da confusão dos modelos LLMs permanece imprecisa...')
     st.image("https://raw.githubusercontent.com/pedrosale/papagaio_estocastico/9b270efddaae8743aeec4f5f9cff7327a0e73dee/p_est.jpeg", caption="Papagaio Estocástico", width=225)
     st.markdown('**Esta versão contém:**  \nUm conjunto de dados pré-carregados referente ao tema [Veja os dados](https://raw.githubusercontent.com/pedrosale/papagaio_estocastico/main/AI-Hallucinations-A-Misnomer-Worth-Clarifying.txt).')
                 
