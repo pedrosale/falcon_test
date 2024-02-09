@@ -89,7 +89,7 @@ def main():
 
 
     # Carrega o primeiro arquivo diretamente
-    file_path1 = https://raw.githubusercontent.com/pedrosale/papagaio_estocastico/main/AI-Hallucinations-A-Misnomer-Worth-Clarifying.txt"
+    file_path1 = "https://raw.githubusercontent.com/pedrosale/papagaio_estocastico/main/AI-Hallucinations-A-Misnomer-Worth-Clarifying.txt"
     with tempfile.NamedTemporaryFile(delete=False) as temp_file1:
         temp_file1.write(urllib.request.urlopen(file_path1).read())
         temp_file_path1 = temp_file1.name
