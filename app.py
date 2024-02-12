@@ -86,7 +86,6 @@ def main():
     # Initialize session state
     initialize_session_state()
     st.title('Que tal conversarmos sobre imprecisão das respostas geradas pelos modelos Large Language Models ?')
-    st.image("https://raw.githubusercontent.com/pedrosale/papagaio_estocastico/9b270efddaae8743aeec4f5f9cff7327a0e73dee/p_est.jpeg", caption="Papagaio Estocástico", width=225)
     st.markdown('**Esta versão contém:**  \nConjuntos de dados pré-carregados referente ao tema de imprecisão das respostas geradas pelos modelos Large Language Models [Veja os dados aqui](https://raw.githubusercontent.com/pedrosale/papagaio_estocastico/main/AI-Hallucinations-A-Misnomer-Worth-Clarifying.txt) e [aqui](https://raw.githubusercontent.com/pedrosale/papagaio_estocastico/main/What%20are%20AI%20hallucinations_%20_%20IBM.txt).')
                 
     # Carrega o arquivo diretamente (substitua o caminho do arquivo conforme necessário)
