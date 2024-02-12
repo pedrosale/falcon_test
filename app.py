@@ -86,7 +86,7 @@ def main():
     load_dotenv()
     # Initialize session state
     initialize_session_state()
-    st.title('Que tal conversarmos sobre imprecisão das respostas geradas pelos modelos Large Language Models ?')
+    st.title('Que tal conversarmos sobre imprecisão das respostas geradas pelos modelos de Large Language Models ?')
     st.markdown('**Esta versão contém:**  \nConjuntos de dados pré-carregados referente ao tema de imprecisão das respostas geradas pelos modelos Large Language Models [Veja os dados aqui](https://raw.githubusercontent.com/pedrosale/papagaio_estocastico/main/AI-Hallucinations-A-Misnomer-Worth-Clarifying.txt) e [aqui](https://raw.githubusercontent.com/pedrosale/papagaio_estocastico/main/What%20are%20AI%20hallucinations_%20_%20IBM.txt).')
                 
     # Carrega o arquivo diretamente (substitua o caminho do arquivo conforme necessário)
