@@ -1,3 +1,5 @@
+AI Hallucinations: A Misnomer Worth Clarifying
+
 Abstract—As large language models continue to advance in
 Artificial Intelligence (AI), text generation systems have been
 shown to suffer from a problematic phenomenon termed often
