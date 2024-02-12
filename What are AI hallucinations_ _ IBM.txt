@@ -1,3 +1,5 @@
+What are AI hallucinations?
+
 AI hallucination is a phenomenon wherein a large language model (LLM)—often a generative AI chatbot or computer vision tool—perceives patterns or objects that are nonexistent or imperceptible to human observers, creating outputs that are nonsensical or altogether inaccurate.
 
 Generally, if a user makes a request of a generative AI tool, they desire an output that appropriately addresses the prompt (i.e., a correct answer to a question). However, sometimes AI algorithms produce outputs that are not based on training data, are incorrectly decoded by the transformer or do not follow any identifiable pattern. In other words, it “hallucinates” the response.
