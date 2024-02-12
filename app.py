@@ -47,7 +47,7 @@ def display_chat_history(chain):
 
     with container:
         with st.form(key='my_form', clear_on_submit=True):
-            user_input = st.text_input("question:", placeholder="Me pergunte sobre o conjunto de dados pré-carregados", key='input')
+            user_input = st.text_input("question:", placeholder="Me pergunte sobre os conjuntos de dados pré-carregados", key='input')
             submit_button = st.form_submit_button(label='Enviar')
 
         if submit_button and user_input:
@@ -87,7 +87,7 @@ def main():
     initialize_session_state()
     st.title('Este é um papagaio estocástico desenvolvido por Pedro Sampaio Amorim para debater sobre como lidar com papagaios estocásticos ou pelo menos tentar, uma vez que a própria definição sobre confusão dos modelos LLMs permanece imprecisa...')
     st.image("https://raw.githubusercontent.com/pedrosale/papagaio_estocastico/9b270efddaae8743aeec4f5f9cff7327a0e73dee/p_est.jpeg", caption="Papagaio Estocástico", width=225)
-    st.markdown('**Esta versão contém:**  \nUm conjunto de dados pré-carregados referente ao tema de imprecisão das respostas geradas pelos modelos Large Language Models [Veja os dados aqui](https://raw.githubusercontent.com/pedrosale/papagaio_estocastico/main/AI-Hallucinations-A-Misnomer-Worth-Clarifying.txt) e [aqui](https://raw.githubusercontent.com/pedrosale/papagaio_estocastico/main/What%20are%20AI%20hallucinations_%20_%20IBM.txt).')
+    st.markdown('**Esta versão contém:**  \nUm conjuntos de dados pré-carregados referente ao tema de imprecisão das respostas geradas pelos modelos Large Language Models [Veja os dados aqui](https://raw.githubusercontent.com/pedrosale/papagaio_estocastico/main/AI-Hallucinations-A-Misnomer-Worth-Clarifying.txt) e [aqui](https://raw.githubusercontent.com/pedrosale/papagaio_estocastico/main/What%20are%20AI%20hallucinations_%20_%20IBM.txt).')
                 
     # Carrega o arquivo diretamente (substitua o caminho do arquivo conforme necessário)
 
