@@ -28,7 +28,7 @@ def initialize_session_state():
         st.session_state['generated'] = ["Como posso te ajudar?"]
 
     if 'past' not in st.session_state:
-        st.session_state['past'] = ["Olá, sou um assistente bem intencionado."]
+        st.session_state['past'] = ["Olá, sou modelo que deve responder de maneir aaleatória!"]
 
 def conversation_chat(query, chain, history):
     prompt = """
