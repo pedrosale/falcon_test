@@ -116,7 +116,7 @@ def main():
 
     # Carrega o segundo arquivo diretamente
     file_path3 = "https://raw.githubusercontent.com/pedrosale/papagaio_estocastico/main/A%20Survey%20on%20Hallucination%20in%20Large%20Language%20Models.txt"
-    with tempfile.NamedTemporaryFile(delete=False) as file_path3:
+    with tempfile.NamedTemporaryFile(delete=False) as temp_file3:
         file_path3.write(urllib.request.urlopen(file_path3).read())
         temp_file_path3 = temp_file3.name
 
