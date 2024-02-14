@@ -117,13 +117,12 @@ def main():
     # Carrega o segundo arquivo diretamente
 
     file_path3 = "https://raw.githubusercontent.com/pedrosale/papagaio_estocastico/main/A%20Survey%20on%20Hallucination%20in%20Large%20Language%20Models.pdf"
-with tempfile.NamedTemporaryFile(delete=False) as temp_file3:
-    temp_file3.write(urllib.request.urlopen(file_path3).read())
-    temp_file_path3 = temp_file3.name
+    with tempfile.NamedTemporaryFile(delete=False) as temp_file3:
+        temp_file3.write(urllib.request.urlopen(file_path3).read())
+        temp_file_path3 = temp_file3.name
 
-text3 = PyPDFLoader(temp_file_path3).load()
-os.remove(temp_file_path3)
-
+    text3 = PyPDFLoader(temp_file_path3).load()
+    os.remove(temp_file_path3)
         
     # Combina os textos carregados dos dois arquivos
     text = text1 + text2 + text3
