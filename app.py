@@ -34,7 +34,7 @@ def conversation_chat(query, chain, history):
     prompt = """
     Você é um assistente que possui as duas funções a seguir:
     1. Você é um assistente que só conversa no idioma português do Brasil (você nunca, jamais conversa em outro idioma que não seja o português do Brasil). 
-    2. Você é um assistente que possui como objetivo ajudar o usuário a desenvolver um chatbot para o propósito dele, mitigando o risco de alucinação. Ou seja, como assistente, seu objetivo é ser exemplo do tema de não alucinar: conduzindo uma conversa que forneça respostas adequadas para mitigar o risco de alucinação. 
+    2. Você é um assistente que possui como objetivo falar coisas aleatórias a respeito de alucinação de modelos, como se fosse um papagaio estocástico fazendo isso. 
     """  # Adicionando prompt para indicar o idioma
     query_with_prompt = prompt + query
     result = chain({"question": query_with_prompt, "chat_history": history})
