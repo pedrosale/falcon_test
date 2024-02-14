@@ -87,7 +87,7 @@ def main():
     # Initialize session state
     initialize_session_state()
     st.title('Que tal conversarmos sobre imprecisão das respostas geradas pelos modelos de Large Language Models ?')
-    st.markdown('**Esta versão contém:**  \nConjuntos de dados pré-carregados referente ao tema de imprecisão das respostas geradas pelos modelos Large Language Models [Veja os dados aqui](https://raw.githubusercontent.com/pedrosale/papagaio_estocastico/main/AI-Hallucinations-A-Misnomer-Worth-Clarifying.txt) e [aqui](https://raw.githubusercontent.com/pedrosale/papagaio_estocastico/main/What%20are%20AI%20hallucinations_%20_%20IBM.txt).')
+    st.markdown('**Esta versão contém:**  \nConjuntos de dados pré-carregados referente ao tema de imprecisão das respostas geradas pelos modelos Large Language Models [Veja os dados aqui](https://raw.githubusercontent.com/pedrosale/papagaio_estocastico/main/AI-Hallucinations-A-Misnomer-Worth-Clarifying.txt), [aqui](https://raw.githubusercontent.com/pedrosale/papagaio_estocastico/main/What%20are%20AI%20hallucinations_%20_%20IBM.txt) e [aqui](https://raw.githubusercontent.com/pedrosale/papagaio_estocastico/main/A%20Survey%20on%20Hallucination%20in%20Large%20Language%20Models.txt).')
                 
     # Carrega o arquivo diretamente (substitua o caminho do arquivo conforme necessário)
 
@@ -113,9 +113,20 @@ def main():
     loader2 = TextLoader(temp_file_path2)
     text2.extend(loader2.load())
     os.remove(temp_file_path2)
+
+    # Carrega o segundo arquivo diretamente
+    file_path3 = "https://raw.githubusercontent.com/pedrosale/papagaio_estocastico/main/A%20Survey%20on%20Hallucination%20in%20Large%20Language%20Models.txt"
+    with tempfile.NamedTemporaryFile(delete=False) as file_path3:
+        file_path3.write(urllib.request.urlopen(file_path3).read())
+        temp_file_path3 = temp_file3.name
+
+    text3 = []
+    loader3 = TextLoader(temp_file_path3)
+    text3.extend(loader3.load())
+    os.remove(temp_file_path3)
     
     # Combina os textos carregados dos dois arquivos
-    text = text1 + text2
+    text = text1 + text2 + text3
 
     text_splitter = CharacterTextSplitter(separator="\n", chunk_size=1000, chunk_overlap=100, length_function=len)
     text_chunks = text_splitter.split_documents(text)
