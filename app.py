@@ -114,19 +114,8 @@ def main():
     text2.extend(loader2.load())
     os.remove(temp_file_path2)
 
-    # Carrega o segundo arquivo diretamente
-    file_path3 = "https://raw.githubusercontent.com/pedrosale/papagaio_estocastico/main/A%20Survey%20on%20Hallucination%20in%20Large%20Language%20Models.txt"
-    with tempfile.NamedTemporaryFile(delete=False) as temp_file3:
-        file_path3.write(urllib.request.urlopen(file_path3).read())
-        temp_file_path3 = temp_file3.name
-
-    text3 = []
-    loader3 = TextLoader(temp_file_path3)
-    text3.extend(loader3.load())
-    os.remove(temp_file_path3)
-    
     # Combina os textos carregados dos dois arquivos
-    text = text1 + text2 + text3
+    text = text1 + text2
 
     text_splitter = CharacterTextSplitter(separator="\n", chunk_size=1000, chunk_overlap=100, length_function=len)
     text_chunks = text_splitter.split_documents(text)
