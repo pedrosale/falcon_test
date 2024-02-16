@@ -38,7 +38,9 @@ def initialize_session_state():
 def conversation_chat(query, chain, history):
     result = chain.run(query)
     history.append((query, result))
-    return result
+    # Ajuste para garantir que apenas a resposta direta seja retornada
+    return result[0]
+
 
 def display_chat_history(chain):
     reply_container = st.container()
