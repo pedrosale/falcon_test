@@ -71,7 +71,7 @@ def create_conversational_chain(vector_store):
     prompt = """
 Você é um assistente de inteligência artificial.
 O assistente fornece respostas úteis, detalhadas e educadas às perguntas do usuário.
-Pergunta: {question}\n\nResposta:"""
+Question: {question}\n\nAnswer: Let's think step by step."""
     template = PromptTemplate(template=prompt, input_variables=["question"])
     chain = LLMChain(prompt=template, llm=llm)
     return chain
