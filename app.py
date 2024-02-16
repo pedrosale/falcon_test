@@ -17,11 +17,6 @@ model = "tiiuae/falcon-40b"
 tokenizer = AutoTokenizer.from_pretrained(model)
 
 
-class ContentHandler(LLMContentHandler):
-    content_type = "application/json"
-    accepts = "application/json"
-    len_prompt = 0
-
     def transform_input(self, prompt: str, model_kwargs: Dict) -> bytes:
         self.len_prompt = len(prompt)
         input_str = json.dumps({"inputs": prompt, "parameters": {"max_new_tokens": 100, "stop": ["Human:"], "do_sample": False, "repetition_penalty": 1.1}})
