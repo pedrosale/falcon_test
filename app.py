@@ -1,7 +1,6 @@
 import streamlit as st
 from streamlit_chat import message
 from langchain import HuggingFaceHub
-from apikey_hungingface import apikey_hungingface
 from langchain import PromptTemplate, LLMChain
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores import FAISS
@@ -11,9 +10,6 @@ import os
 from dotenv import load_dotenv
 import tempfile
 import urllib.request
-
-# Obtém o token de API do Hugging Face Hub do ambiente
-apikey_hungingface = os.getenv("HUGGINGFACEHUB_API_TOKEN", "SEU_TOKEN_PADRAO_AQUI")
 
 load_dotenv()
 
@@ -55,7 +51,10 @@ def display_chat_history(chain):
                 message(st.session_state["generated"][i], key=str(i))
 
 def create_conversational_chain(vector_store):
-    llm = HuggingFaceHub(repo_id="tiiuae/falcon-7b-instruct", model_kwargs={"temperature": 0.3, "max_new_tokens": 2000})
+    # Obter o token de API do ambiente
+    huggingface_token = os.getenv("HUGGINGFACEHUB_API_TOKEN", "SEU_TOKEN_PADRAO_AQUI")
+    
+    llm = HuggingFaceHub(repo_id="tiiuae/falcon-7b-instruct", model_kwargs={"temperature": 0.3, "max_new_tokens": 2000}, api_key=huggingface_token)
     prompt = """
 You are an artificial intelligence assistant.
 The assistant gives helpful, detailed, and polite answers to the user's question
