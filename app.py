@@ -8,10 +8,6 @@ from apikey_hungingface import apikey_hungingface
 from langchain import PromptTemplate, LLMChain
 import os
 
-# Set Hugging Face Hub API token
-# Make sure to store your API token in the `apikey_hungingface.py` file
-os.environ["HUGGINGFACEHUB_API_TOKEN"] = apikey_hungingface
-
 # Set up the language model using the Hugging Face Hub repository
 repo_id = "tiiuae/falcon-7b-instruct"
 llm = HuggingFaceHub(repo_id=repo_id, model_kwargs={"temperature": 0.3, "max_new_tokens": 2000})
