@@ -2,7 +2,6 @@ import streamlit as st
 from streamlit_chat import message
 from langchain.chains import ConversationChain
 from langchain.memory import ConversationBufferMemory
-from langchain.llms.sagemaker_endpoint import LLMContentHandler, SagemakerEndpoint
 from typing import Dict
 import json
 from io import StringIO
@@ -41,11 +40,7 @@ content_handler = ContentHandler()
 
 @st.cache_resource
 def load_chain():
-    llm = SagemakerEndpoint(
-        endpoint_name=endpoint_name,
-        region_name="us-east-1",
-        content_handler=content_handler,
-    )
+    llm = HuggingFaceHub(repo_id="tiiuae/falcon-7b-instruct", model_kwargs={"temperature": 0.3, "max_new_tokens": 2000})
     memory = ConversationBufferMemory()
     chain = ConversationChain(llm=llm, memory=memory)
     return chain
