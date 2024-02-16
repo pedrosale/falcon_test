@@ -68,7 +68,7 @@ def create_conversational_chain(vector_store):
 
     llm = HuggingFaceHub(repo_id="tiiuae/falcon-7b-instruct", model_kwargs={"temperature":0.1 ,"max_length":512})
     memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
-    chain = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=vectorStore.as_retriever())
+    chain = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=vector_store.as_retriever())
     return chain
 
 
