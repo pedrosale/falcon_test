@@ -10,6 +10,8 @@ import os
 from dotenv import load_dotenv
 import tempfile
 import urllib.request
+from langchain.document_loaders import TextLoader
+
 
 load_dotenv()
 
