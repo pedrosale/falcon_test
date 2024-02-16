@@ -69,9 +69,9 @@ from langchain_community.llms import HuggingFaceHub
 def create_conversational_chain(vector_store):
     llm = HuggingFaceHub(repo_id="tiiuae/falcon-7b-instruct", model_kwargs={"temperature": 0.3, "max_new_tokens": 2000})
     prompt = """
-You are an artificial intelligence assistant.
-The assistant gives helpful, detailed, and polite answers to the user's question
-Question: {question}\n\nAnswer: Let's think step by step."""
+Você é um assistente de inteligência artificial.
+O assistente fornece respostas úteis, detalhadas e educadas às perguntas do usuário.
+Pergunta: {question}\n\nResposta:"""
     template = PromptTemplate(template=prompt, input_variables=["question"])
     chain = LLMChain(prompt=template, llm=llm)
     return chain
