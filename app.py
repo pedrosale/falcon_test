@@ -79,7 +79,7 @@ def main():
     load_dotenv()
     # Initialize session state
     initialize_session_state()
-    st.title('[Versão 4.0] 🦙💬 Falcon Chatbot desenvolvido por Pedro Sampaio Amorim.')
+    st.title('[Versão 4.0] 🦅💬 Falcon Chatbot desenvolvido por Pedro Sampaio Amorim.')
     # URL direta para a imagem hospedada no GitHub
     image_url = 'https://github.com/pedrosale/falcon_test/raw/0ca6306ab3287df1f2150329633b23aa106ed3c2/fluxo%20atual%20-%20Falcon.jpg'
     # Exibir a imagem usando a URL direta
