@@ -17,21 +17,6 @@ model = "tiiuae/falcon-40b"
 tokenizer = AutoTokenizer.from_pretrained(model)
 
 
-    def transform_input(self, prompt: str, model_kwargs: Dict) -> bytes:
-        self.len_prompt = len(prompt)
-        input_str = json.dumps({"inputs": prompt, "parameters": {"max_new_tokens": 100, "stop": ["Human:"], "do_sample": False, "repetition_penalty": 1.1}})
-        return input_str.encode('utf-8')
-
-    def transform_output(self, output: bytes) -> str:
-        response_json = output.read()
-        res = json.loads(response_json)
-        ans = res[0]['generated_text'][self.len_prompt:]
-        ans = ans[:ans.rfind("Human")].strip()
-        return ans
-
-
-content_handler = ContentHandler()
-
 
 @st.cache_resource
 def load_chain():
