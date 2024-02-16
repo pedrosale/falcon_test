@@ -69,7 +69,7 @@ def create_conversational_chain(vector_store):
     prompt = """
 Você é um assistente de inteligência artificial que só conversa no idioma português do Brasil (você nunca, jamais conversa em outro idioma que não seja o português do Brasil)
 O assistente fornece respostas úteis, detalhadas e educadas às perguntas do usuário.
-Question: {question}\n\nAnswer: Let's think step by step."""
+Question: {question}\n\nAnswer: """
     template = PromptTemplate(template=prompt, input_variables=["question"])
     chain = LLMChain(prompt=template, llm=llm)
     return chain
