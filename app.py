@@ -36,9 +36,7 @@ def initialize_session_state():
         st.session_state['past'] = ["Olá, sou assistente do Pedro."]
 
 def conversation_chat(query, chain, history):
-    prompt = "Você é um assistente que só conversa no idioma português do Brasil (você nunca, jamais conversa em outro idioma que não seja o português do Brasil):\n\n"  # Adicionando prompt para indicar o idioma
-    query_with_prompt = prompt + query
-    result = chain.run(query_with_prompt)
+    result = chain.run(query)
     history.append((query, result))
     return result
 
@@ -69,7 +67,7 @@ from langchain_community.llms import HuggingFaceHub
 def create_conversational_chain(vector_store):
     llm = HuggingFaceHub(repo_id="tiiuae/falcon-7b-instruct", model_kwargs={"temperature": 0.3, "max_new_tokens": 2000})
     prompt = """
-Você é um assistente de inteligência artificial.
+Você é um assistente de inteligência artificial que só conversa no idioma português do Brasil (você nunca, jamais conversa em outro idioma que não seja o português do Brasil)
 O assistente fornece respostas úteis, detalhadas e educadas às perguntas do usuário.
 Question: {question}\n\nAnswer: Let's think step by step."""
     template = PromptTemplate(template=prompt, input_variables=["question"])
