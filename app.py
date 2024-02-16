@@ -66,10 +66,7 @@ from langchain_community.llms import HuggingFaceHub
 
 def create_conversational_chain(vector_store):
     llm = HuggingFaceHub(repo_id="tiiuae/falcon-7b-instruct", model_kwargs={"temperature": 0.3, "max_new_tokens": 2000})
-    prompt = """
-Você é um assistente de inteligência artificial que só conversa no idioma português do Brasil (você nunca, jamais conversa em outro idioma que não seja o português do Brasil)
-O assistente fornece respostas úteis, detalhadas e educadas às perguntas do usuário.
-Question: {question}\n\nAnswer: """
+    prompt = """{question}"""
     template = PromptTemplate(template=prompt, input_variables=["question"])
     chain = LLMChain(prompt=template, llm=llm)
     return chain
