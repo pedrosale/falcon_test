@@ -12,6 +12,9 @@ from dotenv import load_dotenv
 import tempfile
 import urllib.request
 
+# Obtém o token de API do Hugging Face Hub do ambiente
+apikey_hungingface = os.getenv("HUGGINGFACEHUB_API_TOKEN", "SEU_TOKEN_PADRAO_AQUI")
+
 load_dotenv()
 
 def initialize_session_state():
