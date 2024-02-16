@@ -62,11 +62,10 @@ def display_chat_history(chain):
                 message(st.session_state["past"][i], is_user=True, key=str(i) + '_user')
                 message(st.session_state["generated"][i], key=str(i))
 
+from langchain_community.llms import HuggingFaceHub
+
 def create_conversational_chain(vector_store):
-    # Obter o token de API do ambiente
-    huggingface_token = os.getenv("HUGGINGFACEHUB_API_TOKEN", "SEU_TOKEN_PADRAO_AQUI")
-    
-    llm = HuggingFaceHub(repo_id="tiiuae/falcon-7b-instruct", model_kwargs={"temperature": 0.3, "max_new_tokens": 2000}, api_key=huggingface_token)
+    llm = HuggingFaceHub(repo_id="tiiuae/falcon-7b-instruct", model_kwargs={"temperature": 0.3, "max_new_tokens": 2000})
     prompt = """
 You are an artificial intelligence assistant.
 The assistant gives helpful, detailed, and polite answers to the user's question
@@ -74,6 +73,7 @@ Question: {question}\n\nAnswer: Let's think step by step."""
     template = PromptTemplate(template=prompt, input_variables=["question"])
     chain = LLMChain(prompt=template, llm=llm)
     return chain
+
 
 def main():
     load_dotenv()
