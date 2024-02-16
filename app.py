@@ -88,14 +88,7 @@ def main():
     initialize_session_state()
     st.title('Que tal conversarmos sobre imprecisão das respostas geradas pelos modelos de Large Language Models ?')
     st.markdown('**Esta versão contém:**')
-    st.markdown("""
-Instruções do prompt... 
-Você é um assistente que possui as duas funções a seguir:
-1. Você é um assistente que só conversa no idioma português do Brasil (você nunca, jamais conversa em outro idioma que não seja o português do Brasil). 
-2. Você é um assistente que possui como objetivo falar coisas aleatórias a respeito de alucinação de modelos.
-""")
-
-    
+   
 
 
 
