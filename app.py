@@ -64,8 +64,8 @@ def display_chat_history(chain):
 def create_conversational_chain(vector_store):
     load_dotenv()
 
-    llm = HuggingFaceHub(repo_id="tiiuae/falcon-7b-instruct", model_kwargs={"temperature": 0.3, "max_new_tokens": 2000})
-    memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
+    llm = HuggingFaceHub(repo_id="tiiuae/falcon-7b-instruct", model_kwargs={"temperature": 0.01, "max_new_tokens": 500})
+    memory = ConversationBufferMemory()
     chain = ConversationalRetrievalChain.from_llm(llm=llm, chain_type='stuff',
                                                  retriever=vector_store.as_retriever(search_kwargs={"k": 2}),
                                                  memory=memory)
