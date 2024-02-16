@@ -36,7 +36,9 @@ def initialize_session_state():
         st.session_state['past'] = ["Olá, sou assistente do Pedro."]
 
 def conversation_chat(query, chain, history):
-    result = chain.run(query)
+    prompt = "Você é um assistente que só conversa no idioma português do Brasil (você nunca, jamais conversa em outro idioma que não seja o português do Brasil):\n\n"  # Adicionando prompt para indicar o idioma
+    query_with_prompt = prompt + query
+    result = chain.run(query_with_prompt)
     history.append((query, result))
     return result
 
