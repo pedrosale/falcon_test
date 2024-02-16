@@ -1,24 +1,18 @@
 import streamlit as st
+from streamlit_chat import message
 from langchain import HuggingFaceHub
 from apikey_hungingface import apikey_hungingface
 from langchain import PromptTemplate, LLMChain
+from langchain.embeddings import HuggingFaceEmbeddings
+from langchain.vectorstores import FAISS
+from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
+from langchain.memory import ConversationBufferMemory
 import os
+from dotenv import load_dotenv
+import tempfile
+import urllib.request
 
-# Set Hugging Face Hub API token
-# Certifique-se de armazenar seu token API no arquivo `apikey_hungingface.py`
-os.environ["HUGGINGFACEHUB_API_TOKEN"] = apikey_hungingface
-
-# Set up the language model using the Hugging Face Hub repository
-repo_id = "tiiuae/falcon-7b-instruct"
-llm = HuggingFaceHub(repo_id=repo_id, model_kwargs={"temperature": 0.3, "max_new_tokens": 2000})
-
-# Set up the prompt template
-template = """
-You are an artificial intelligence assistant.
-The assistant gives helpful, detailed, and polite answers to the user's question
-Question: {question}\n\nAnswer: Let's think step by step."""
-prompt = PromptTemplate(template=template, input_variables=["question"])
-llm_chain = LLMChain(prompt=prompt, llm=llm)
+load_dotenv()
 
 def initialize_session_state():
     if 'history' not in st.session_state:
@@ -54,17 +48,70 @@ def display_chat_history(chain):
     if st.session_state['generated']:
         with reply_container:
             for i in range(len(st.session_state['generated'])):
-                st.text_input("Pergunta:", value=st.session_state["past"][i], key=str(i) + '_user', disabled=True)
-                st.text_input("Resposta:", value=st.session_state["generated"][i], key=str(i), disabled=True)
+                message(st.session_state["past"][i], is_user=True, key=str(i) + '_user')
+                message(st.session_state["generated"][i], key=str(i))
+
+def create_conversational_chain(vector_store):
+    llm = HuggingFaceHub(repo_id="tiiuae/falcon-7b-instruct", model_kwargs={"temperature": 0.3, "max_new_tokens": 2000})
+    prompt = """
+You are an artificial intelligence assistant.
+The assistant gives helpful, detailed, and polite answers to the user's question
+Question: {question}\n\nAnswer: Let's think step by step."""
+    template = PromptTemplate(template=prompt, input_variables=["question"])
+    chain = LLMChain(prompt=template, llm=llm)
+    return chain
 
 def main():
+    load_dotenv()
+    # Initialize session state
     initialize_session_state()
-    st.title('[Versão 3.0] 🦙💬 FALCON Chatbot desenvolvido por Pedro Sampaio Amorim.')
+    st.title('[Versão 3.0] 🦙💬 Llama 2 Chatbot desenvolvido por Pedro Sampaio Amorim.')
+    # URL direta para a imagem hospedada no GitHub
     image_url = 'https://raw.githubusercontent.com/pedrosale/bot2/168f145c9833dcefac6ccab4c351234e819a5e97/fluxo%20atual.jpg'
+    # Exibir a imagem usando a URL direta
     st.image(image_url, caption='Arquitetura atual: GitHub + Streamlit')
-    st.markdown('**Esta versão contém:**  \nA) Modelo FALCON;  \nB) Conjunto de dados pré-carregados do CTB [1. Arquivo de Contexto](https://raw.githubusercontent.com/pedrosale/bot2/main/CTB3.txt) e [2. Reforço de Contexto](https://raw.githubusercontent.com/pedrosale/bot2/main/CTB2.txt);  \nC) Processamento dos dados carregados (em B.) com uso da biblioteca Langchain.')
+    st.markdown('**Esta versão contém:**  \nA) Modelo FALCON com refinamento de parâmetros;  \nB) Conjunto de dados pré-carregados do CTB [1. Arquivo de Contexto](https://raw.githubusercontent.com/pedrosale/bot2/main/CTB3.txt) e [2. Reforço de Contexto](https://raw.githubusercontent.com/pedrosale/bot2/main/CTB2.txt);  \nC) Processamento dos dados carregados (em B.) com uso da biblioteca Langchain.')
+    # Carrega o arquivo diretamente (substitua o caminho do arquivo conforme necessário)
 
-    display_chat_history(llm_chain)
+    # Carrega o primeiro arquivo diretamente
+    file_path1 = "https://raw.githubusercontent.com/pedrosale/bot2/main/CTB3.txt"
+    with tempfile.NamedTemporaryFile(delete=False) as temp_file1:
+        temp_file1.write(urllib.request.urlopen(file_path1).read())
+        temp_file_path1 = temp_file1.name
+
+    text1 = []
+    loader1 = TextLoader(temp_file_path1)
+    text1.extend(loader1.load())
+    os.remove(temp_file_path1)
+    
+    # Carrega o segundo arquivo diretamente
+    file_path2 = "https://raw.githubusercontent.com/pedrosale/bot2/main/CTB2.txt"
+    with tempfile.NamedTemporaryFile(delete=False) as temp_file2:
+        temp_file2.write(urllib.request.urlopen(file_path2).read())
+        temp_file_path2 = temp_file2.name
+
+    text2 = []
+    loader2 = TextLoader(temp_file_path2)
+    text2.extend(loader2.load())
+    os.remove(temp_file_path2)
+    
+    # Combina os textos carregados dos dois arquivos
+    text = text1 + text2
+
+    text_splitter = CharacterTextSplitter(separator="\n", chunk_size=1000, chunk_overlap=100, length_function=len)
+    text_chunks = text_splitter.split_documents(text)
+
+    # Create embeddings
+    embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2",
+                                      model_kwargs={'device': 'cpu'})
+
+    # Create vector store
+    vector_store = FAISS.from_documents(text_chunks, embedding=embeddings)
+
+    # Create the chain object
+    chain = create_conversational_chain(vector_store)
+
+    display_chat_history(chain)
 
 if __name__ == "__main__":
     main()
