@@ -1,16 +1,26 @@
-import streamlit as st
-from streamlit_chat import message
+from dotenv import load_dotenv
 from langchain import HuggingFaceHub
 from langchain import PromptTemplate, LLMChain
-from langchain.embeddings import HuggingFaceEmbeddings
-from langchain.vectorstores import FAISS
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
+from langchain.chains import ConversationalRetrievalChain
+from langchain.document_loaders import Docx2txtLoader
+from langchain.document_loaders import PyPDFLoader
+from langchain.document_loaders import TextLoader
+from langchain.embeddings import HuggingFaceEmbeddings
+from langchain.llms import CTransformers
+from langchain.llms import Replicate
 from langchain.memory import ConversationBufferMemory
+from langchain.text_splitter import CharacterTextSplitter
+from langchain.text_splitter import CharacterTextSplitter  # Importe esta linha
+from langchain.vectorstores import FAISS
+from streamlit_chat import message
 import os
-from dotenv import load_dotenv
+import requests
+import streamlit as st
 import tempfile
 import urllib.request
-from langchain.document_loaders import TextLoader
+
+
 
 
 load_dotenv()
