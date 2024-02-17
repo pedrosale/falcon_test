@@ -12,7 +12,6 @@ from langchain.document_loaders import TextLoader
 from langchain.document_loaders import Docx2txtLoader
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 import os
-from dotenv import load_dotenv
 import tempfile
 import urllib.request
 import requests
