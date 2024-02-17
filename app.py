@@ -16,9 +16,6 @@ from dotenv import load_dotenv
 import tempfile
 import urllib.request
 import requests
-from langchain_community.llms import HuggingFaceHub
-from langchain.chains import RetrievalQA
-from langchain.schema import retriever
 
 load_dotenv()
 
@@ -34,9 +31,9 @@ def initialize_session_state():
         st.session_state['past'] = ["Olá, sou assistente do Pedro."]
 
 def conversation_chat(query, chain, history):
-    prompt = "Você é um assistente que só conversa no idioma português do Brasil (você nunca, jamais conversa em outro idioma que não seja o português do Brasil):\n\n"
+    prompt = "Você é um assistente que só conversa no idioma português do Brasil (você nunca, jamais conversa em outro idioma que não seja o português do Brasil):\n\n"  # Adicionando prompt para indicar o idioma
     query_with_prompt = prompt + query
-    result = chain({"query": query_with_prompt})  # Ajuste aqui para 'query' em vez de 'question'
+    result = chain({"question": query_with_prompt, "chat_history": history})
     history.append((query, result["answer"]))
     return result["answer"]
 
@@ -66,9 +63,17 @@ def display_chat_history(chain):
 def create_conversational_chain(vector_store):
     load_dotenv()
 
-    llm = HuggingFaceHub(repo_id="tiiuae/falcon-7b-instruct", model_kwargs={"temperature":0.1 ,"max_length":512})
+    llm = HuggingFaceHub(
+    repo_id="tiiuae/falcon-7b-instruct", 
+    model_kwargs={"temperature": 0.01, "max_length": 500, "top_p": 1},
+    callbacks=[StreamingStdOutCallbackHandler()],
+    language="pt-BR")
+
     memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
-    chain = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=vector_store.as_retriever())
+
+    chain = ConversationalRetrievalChain.from_llm(llm=llm, chain_type='stuff',
+                                                 retriever=vector_store.as_retriever(search_kwargs={"k": 2}),
+                                                 memory=memory)
     return chain
 
 
