@@ -18,10 +18,6 @@ import urllib.request
 import requests
 from langchain_community.llms import HuggingFaceHub
 
-
-load_dotenv()
-
-
 def initialize_session_state():
     if 'history' not in st.session_state:
         st.session_state['history'] = []
@@ -63,7 +59,6 @@ def display_chat_history(chain):
                 message(st.session_state["generated"][i], key=str(i))
 
 def create_conversational_chain(vector_store):
-    load_dotenv()
 
     llm = HuggingFaceHub(
     repo_id="tiiuae/falcon-7b-instruct", 
@@ -80,7 +75,6 @@ def create_conversational_chain(vector_store):
 
 
 def main():
-    load_dotenv()
     # Initialize session state
     initialize_session_state()
     st.title('[Versão 4.0] 🦅💬 Falcon Chatbot desenvolvido por Pedro Sampaio Amorim.')
