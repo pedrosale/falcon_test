@@ -16,6 +16,8 @@ from dotenv import load_dotenv
 import tempfile
 import urllib.request
 import requests
+from langchain_community.llms import HuggingFaceHub
+
 
 load_dotenv()
 
