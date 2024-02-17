@@ -15,7 +15,6 @@ import os
 import tempfile
 import urllib.request
 import requests
-from langchain_community.llms import HuggingFaceHub
 
 def initialize_session_state():
     if 'history' not in st.session_state:
