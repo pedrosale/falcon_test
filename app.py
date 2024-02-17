@@ -2,6 +2,7 @@ import streamlit as st
 from streamlit_chat import message
 from langchain.chains import ConversationalRetrievalChain
 from langchain.embeddings import HuggingFaceEmbeddings
+from langchain import HuggingFaceHub
 from langchain.llms import CTransformers
 from langchain.llms import Replicate
 from langchain.text_splitter import CharacterTextSplitter  # Importe esta linha
@@ -63,13 +64,12 @@ def display_chat_history(chain):
 def create_conversational_chain(vector_store):
     load_dotenv()
 
-    llm = Replicate(
-        streaming = True,
-        model = "replicate/llama-2-70b-chat:58d078176e02c219e11eb4da5a02a7830a283b14cf8f94537af893ccff5ee781", 
-        #model = "tomasmcm/towerinstruct-7b-v0.1",         
-        language="pt-BR",  
-        callbacks=[StreamingStdOutCallbackHandler()],
-        input = {"temperature": 0.01, "max_length" :500,"top_p":1})
+    llm = HuggingFaceHub(
+    repo_id="tiiuae/falcon-7b-instruct", 
+    model_kwargs={"temperature": 0.01, "max_length": 500, "top_p": 1},
+    callbacks=[StreamingStdOutCallbackHandler()],
+    language="pt-BR")
+
     memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
 
     chain = ConversationalRetrievalChain.from_llm(llm=llm, chain_type='stuff',
@@ -78,17 +78,17 @@ def create_conversational_chain(vector_store):
     return chain
 
 
+
 def main():
     load_dotenv()
     # Initialize session state
     initialize_session_state()
-    st.title('[Versão 3.0] 🦙💬 Llama 2 Chatbot desenvolvido por Pedro Sampaio Amorim.')
+    st.title('[Versão 4.0] 🦅💬 Falcon Chatbot desenvolvido por Pedro Sampaio Amorim.')
     # URL direta para a imagem hospedada no GitHub
-    image_url = 'https://raw.githubusercontent.com/pedrosale/bot2/168f145c9833dcefac6ccab4c351234e819a5e97/fluxo%20atual.jpg'
+    image_url = 'https://github.com/pedrosale/falcon_test/raw/0ca6306ab3287df1f2150329633b23aa106ed3c2/fluxo%20atual%20-%20Falcon.jpg'
     # Exibir a imagem usando a URL direta
     st.image(image_url, caption='Arquitetura atual: GitHub + Streamlit')
-    st.markdown('**Esta versão contém:**  \nA) Modelo llama2 com refinamento de parâmetros;  \nB) Conjunto de dados pré-carregados do CTB [1. Arquivo de Contexto](https://raw.githubusercontent.com/pedrosale/bot2/main/CTB3.txt) e [2. Reforço de Contexto](https://raw.githubusercontent.com/pedrosale/bot2/main/CTB2.txt);  \nC) Processamento dos dados carregados (em B.) com uso da biblioteca Langchain.')
-    # Carrega o arquivo diretamente (substitua o caminho do arquivo conforme necessário)
+    st.markdown('**Esta versão contém:**  \nA) Modelo FALCON;  \nB) Conjunto de dados pré-carregados do CTB [1. Arquivo de Contexto](https://raw.githubusercontent.com/pedrosale/bot2/main/CTB3.txt) e [2. Reforço de Contexto](https://raw.githubusercontent.com/pedrosale/bot2/main/CTB2.txt);  \nC) Processamento dos dados carregados (em B.) com uso da biblioteca Langchain.')
 
     # Carrega o primeiro arquivo diretamente
     file_path1 = "https://raw.githubusercontent.com/pedrosale/bot2/main/CTB3.txt"
