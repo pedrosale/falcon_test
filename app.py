@@ -4,7 +4,6 @@
 
 import streamlit as st
 from langchain import HuggingFaceHub
-from apikey_hungingface import apikey_hungingface
 from langchain import PromptTemplate, LLMChain
 import os
 
